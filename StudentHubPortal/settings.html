@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Student Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/pages.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <h2>Student Portal</h2>
+            <p>Academic Year 2026-27</p>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="index.html">Dashboard</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="attendance.html">Attendance</a></li>
+            <li><a href="courses.html">Courses</a></li>
+            <li><a href="assignments.html">Assignments</a></li>
+            <li><a href="exams.html">Exams</a></li>
+            <li><a href="results.html">Results</a></li>
+            <li><a href="timetable.html">Timetable</a></li>
+            <li><a href="fees.html">Fees</a></li>
+            <li><a href="settings.html" class="active">Settings</a></li>
+        </ul>
+    </aside>
+
+    <!-- Top Navbar -->
+    <header class="top-navbar">
+        <span class="navbar-title">Settings</span>
+        <span class="navbar-user">Welcome, Smit Mendapara</span>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1>Settings</h1>
+            <p>Update your account settings.</p>
+        </div>
+
+        <!-- Change Password -->
+        <div class="card">
+            <h3 class="mb-10">Change Password</h3>
+            <form class="settings-form" action="#" method="post">
+                <div class="form-group">
+                    <label for="current-password">Current Password</label>
+                    <input type="password" id="current-password" name="current-password" placeholder="Enter current password">
+                </div>
+                <div class="form-group">
+                    <label for="new-password">New Password</label>
+                    <input type="password" id="new-password" name="new-password" placeholder="Enter new password">
+                </div>
+                <div class="form-group">
+                    <label for="confirm-password">Confirm New Password</label>
+                    <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm new password">
+                </div>
+                <button type="submit" class="btn">Update Password</button>
+            </form>
+        </div>
+
+        <!-- Update Contact Info -->
+        <div class="card">
+            <h3 class="mb-10">Update Contact Information</h3>
+            <form class="settings-form" action="#" method="post">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" value="25ce060@charusat.edu.in">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="text" id="phone" name="phone" value="+91 79848 17345">
+                </div>
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <textarea id="address" name="address">CSPIT, CHARUSAT, Gujarat</textarea>
+                </div>
+                <button type="submit" class="btn">Save Changes</button>
+            </form>
+        </div>
+
+        <!-- Notification Preferences -->
+        <div class="card">
+            <h3 class="mb-10">Notification Preferences</h3>
+            <form class="settings-form" action="#" method="post">
+                <div class="form-group">
+                    <label for="notifications">Email Notifications</label>
+                    <select id="notifications" name="notifications">
+                        <option value="all" selected>All Notifications</option>
+                        <option value="important">Important Only</option>
+                        <option value="none">None</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn">Save Preferences</button>
+            </form>
+        </div>
+
+    </main>
+
+</body>
+</html>

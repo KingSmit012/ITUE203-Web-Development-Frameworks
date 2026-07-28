@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance - Student Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/pages.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <h2>Student Portal</h2>
+            <p>Academic Year 2026-27</p>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="index.html">Dashboard</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="attendance.html" class="active">Attendance</a></li>
+            <li><a href="courses.html">Courses</a></li>
+            <li><a href="assignments.html">Assignments</a></li>
+            <li><a href="exams.html">Exams</a></li>
+            <li><a href="results.html">Results</a></li>
+            <li><a href="timetable.html">Timetable</a></li>
+            <li><a href="fees.html">Fees</a></li>
+            <li><a href="settings.html">Settings</a></li>
+        </ul>
+    </aside>
+
+    <!-- Top Navbar -->
+    <header class="top-navbar">
+        <span class="navbar-title">Attendance</span>
+        <span class="navbar-user">Welcome, Smit Mendapara</span>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1>Attendance</h1>
+            <p>View your attendance record for each subject.</p>
+        </div>
+
+        <!-- Attendance Summary -->
+        <div class="attendance-summary">
+            <div class="summary-box">
+                <h3>99%</h3>
+                <p>Overall</p>
+            </div>
+            <div class="summary-box">
+                <h3>50</h3>
+                <p>Total Classes</p>
+            </div>
+            <div class="summary-box">
+                <h3>49</h3>
+                <p>Attended</p>
+            </div>
+            <div class="summary-box">
+                <h3>1</h3>
+                <p>Absent</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3 class="mb-10">Subject-wise Attendance</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Sr. No.</th>
+                        <th>Subject</th>
+                        <th>Total Classes</th>
+                        <th>Attended</th>
+                        <th>Absent</th>
+                        <th>Percentage</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>FCN</td>
+                        <td>20</td>
+                        <td>18</td>
+                        <td>2</td>
+                        <td>90%</td>
+                        <td class="status-present">Good</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>FDSA</td>
+                        <td>18</td>
+                        <td>16</td>
+                        <td>2</td>
+                        <td>89%</td>
+                        <td class="status-present">Good</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Discrete Mathematics</td>
+                        <td>12</td>
+                        <td>11</td>
+                        <td>1</td>
+                        <td>92%</td>
+                        <td class="status-present">Good</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>WDF</td>
+                        <td>18</td>
+                        <td>15</td>
+                        <td>3</td>
+                        <td>83%</td>
+                        <td class="status-present">Good</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>OOP</td>
+                        <td>12</td>
+                        <td>10</td>
+                        <td>2</td>
+                        <td>83%</td>
+                        <td class="status-present">Good</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>HS</td>
+                        <td>8</td>
+                        <td>7</td>
+                        <td>1</td>
+                        <td>88%</td>
+                        <td class="status-present">Good</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>Python With DataScience</td>
+                        <td>8</td>
+                        <td>7</td>
+                        <td>1</td>
+                        <td>88%</td>
+                        <td class="status-present">Good</td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+
+    </main>
+
+</body>
+</html>

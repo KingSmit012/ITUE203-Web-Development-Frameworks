@@ -1,0 +1,129 @@
+/* ===========================
+   Page-Specific Styles
+   =========================== */
+
+/* Dashboard Page */
+.dashboard-cards .card {
+    text-align: center;
+}
+
+.dashboard-cards .card h3 {
+    font-size: 24px;
+    color: #1a73e8;
+    margin-bottom: 5px;
+}
+
+.dashboard-cards .card p {
+    color: #666666;
+    font-size: 12px;
+    margin: 0;
+}
+
+.announcements-list {
+    list-style: none;
+}
+
+.announcements-list li {
+    padding: 8px 0;
+    border-bottom: 1px solid #eeeeee;
+    font-size: 13px;
+}
+
+.announcements-list li:last-child {
+    border-bottom: none;
+}
+
+/* Profile Page */
+.profile-info {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.profile-photo {
+    width: 120px;
+    height: 120px;
+    background-color: #eeeeee;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999999;
+    font-size: 12px;
+}
+
+.profile-details {
+    flex: 1;
+    min-width: 300px;
+}
+
+.profile-details table {
+    max-width: 500px;
+}
+
+.profile-details table td:first-child {
+    font-weight: bold;
+    width: 150px;
+    background-color: #f9f9f9;
+}
+
+/* Attendance Page */
+.attendance-summary {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.attendance-summary .summary-box {
+    border: 1px solid #dddddd;
+    border-radius: 6px;
+    padding: 12px 20px;
+    text-align: center;
+    min-width: 120px;
+}
+
+.attendance-summary .summary-box h3 {
+    font-size: 20px;
+    color: #1a73e8;
+    margin-bottom: 3px;
+}
+
+.attendance-summary .summary-box p {
+    font-size: 12px;
+    color: #666666;
+    margin: 0;
+}
+
+/* Fees Page */
+.fee-total {
+    background-color: #f0f6ff;
+    border: 1px solid #1a73e8;
+    border-radius: 6px;
+    padding: 15px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.fee-total h3 {
+    font-size: 14px;
+    color: #333333;
+    margin-bottom: 5px;
+}
+
+.fee-total p {
+    font-size: 20px;
+    font-weight: bold;
+    color: #1a73e8;
+    margin: 0;
+}
+
+Settings Page
+.settings-form {
+    max-width: 500px;
+}
+
+.settings-form .btn {
+    margin-top: 5px;
+}
