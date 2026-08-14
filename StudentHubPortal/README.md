@@ -21,12 +21,10 @@ student-dashboard/
 ├── css/
 │   ├── style.css       (Base styles - colors, typography, forms, tables)
 │   ├── layout.css      (Sidebar, navbar, grid layout)
-│   ├── pages.css       (Page-specific styles)
-│   └── responsive.css  (Media queries for tablet and mobile)
+│   └── pages.css       (Page-specific styles)
 │
 ├── images/
-│   ├── logo.png
-│   └── student.jpg
+│   └── Profile.jpg
 │
 └── README.md
 ```

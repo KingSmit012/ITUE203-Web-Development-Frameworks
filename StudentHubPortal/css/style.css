@@ -100,7 +100,7 @@ form {
 
 .form-group input,
 .form-group select,
-.form-group textarea {
+.form-group textarea{
     width: 100%;
     padding: 8px 10px;
     border: 1px solid #cccccc;

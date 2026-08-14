@@ -1,6 +1,4 @@
-/* ===========================
-   Layout - Sidebar & Navbar
-   =========================== */
+/* Layout - Sidebar & Navbar*/
 
 /* Sidebar */
 .sidebar {
@@ -148,9 +146,6 @@
     border-radius: 50px;
 }
 
-/* .profile-photo {
-    overflow: hidden;
-} */
 
 .profile-photo img {
     width: 100%;
