@@ -19,9 +19,12 @@ student-dashboard/
 ├── settings.html       (Settings)
 │
 ├── css/
-│   ├── style.css       (Base styles - colors, typography, forms, tables)
+│   ├── style.css       (Base styles, theme tokens, forms, tables)
 │   ├── layout.css      (Sidebar, navbar, grid layout)
 │   └── pages.css       (Page-specific styles)
+│
+├── js/
+│   └── theme.js        (Dark/Light mode switcher with localStorage persistence & tab sync)
 │
 ├── images/
 │   └── Profile.jpg
@@ -31,8 +34,9 @@ student-dashboard/
 
 ## Features
 
+- **Persistent Dark & Light Mode**: Toggle theme from the navbar on any page or from Settings, with instant state persistence across all pages and open tabs via `localStorage`.
 - 10 pages with consistent sidebar and navbar navigation
-- Simple and clean design
+- Simple and clean modern design with smooth transitions
 - Responsive layout using basic media queries
 - Semantic HTML5 elements
 - Placeholder data for all sections
@@ -41,4 +45,5 @@ student-dashboard/
 ## Technologies Used
 
 - HTML5
-- CSS3
+- CSS3 (Variables, Transitions, Flexbox)
+- JavaScript (Theme Engine, Web Storage API, Event Listeners)

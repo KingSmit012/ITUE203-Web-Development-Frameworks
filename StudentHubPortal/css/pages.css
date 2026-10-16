@@ -1,22 +1,28 @@
-/* ===========================
+/* ==========================================================================
    Page-Specific Styles
-   =========================== */
+   ========================================================================== */
 
 /* Dashboard Page */
 .dashboard-cards .card {
     text-align: center;
+    padding: 20px 15px;
 }
 
 .dashboard-cards .card h3 {
-    font-size: 24px;
-    color: #1a73e8;
-    margin-bottom: 5px;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 4px;
+    letter-spacing: -0.5px;
 }
 
 .dashboard-cards .card p {
-    color: #666666;
+    color: var(--text-muted);
     font-size: 12px;
+    font-weight: 500;
     margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .announcements-list {
@@ -24,9 +30,16 @@
 }
 
 .announcements-list li {
-    padding: 8px 0;
-    border-bottom: 1px solid #eeeeee;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border-color);
     font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.announcements-list li b {
+    color: var(--text-primary);
+    margin-right: 6px;
 }
 
 .announcements-list li:last-child {
@@ -36,21 +49,9 @@
 /* Profile Page */
 .profile-info {
     display: flex;
-    gap: 20px;
+    gap: 24px;
     flex-wrap: wrap;
-}
-
-.profile-photo {
-    width: 120px;
-    height: 120px;
-    background-color: #eeeeee;
-    border: 1px solid #cccccc;
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #999999;
-    font-size: 12px;
+    align-items: flex-start;
 }
 
 .profile-details {
@@ -59,70 +60,84 @@
 }
 
 .profile-details table {
-    max-width: 500px;
+    max-width: 600px;
 }
 
 .profile-details table td:first-child {
-    font-weight: bold;
-    width: 150px;
-    background-color: #f9f9f9;
+    font-weight: 600;
+    width: 170px;
+    background-color: var(--bg-surface-elevated);
+    color: var(--text-heading);
 }
 
 /* Attendance Page */
 .attendance-summary {
     display: flex;
-    gap: 15px;
-    margin-bottom: 20px;
+    gap: 16px;
+    margin-bottom: 24px;
     flex-wrap: wrap;
 }
 
 .attendance-summary .summary-box {
-    border: 1px solid #dddddd;
-    border-radius: 6px;
-    padding: 12px 20px;
+    flex: 1;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--card-shadow);
+    border-radius: 8px;
+    padding: 14px 20px;
     text-align: center;
-    min-width: 120px;
+    min-width: 130px;
+    transition: var(--theme-transition);
 }
 
 .attendance-summary .summary-box h3 {
-    font-size: 20px;
-    color: #1a73e8;
-    margin-bottom: 3px;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 2px;
 }
 
 .attendance-summary .summary-box p {
     font-size: 12px;
-    color: #666666;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
     margin: 0;
 }
 
 /* Fees Page */
 .fee-total {
-    background-color: #f0f6ff;
-    border: 1px solid #1a73e8;
-    border-radius: 6px;
-    padding: 15px;
-    margin-bottom: 20px;
+    background-color: var(--fee-bg);
+    border: 1px solid var(--fee-border);
+    border-radius: 8px;
+    padding: 18px;
+    margin-bottom: 24px;
     text-align: center;
+    box-shadow: var(--card-shadow);
+    transition: var(--theme-transition);
 }
 
 .fee-total h3 {
-    font-size: 14px;
-    color: #333333;
-    margin-bottom: 5px;
+    font-size: 13px;
+    color: var(--text-heading);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
 }
 
 .fee-total p {
-    font-size: 20px;
-    font-weight: bold;
-    color: #1a73e8;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--primary);
     margin: 0;
 }
 
+/* Settings Page */
 .settings-form {
     max-width: 500px;
 }
 
 .settings-form .btn {
-    margin-top: 5px;
+    margin-top: 6px;
 }
