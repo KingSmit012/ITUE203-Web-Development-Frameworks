@@ -285,16 +285,13 @@ form {
     font-family: var(--font-family);
     transition: all 0.2s ease;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
 }
 
 .btn:hover {
     background-color: var(--primary-hover);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-}
-
-.btn:active {
-    transform: translateY(0);
+    color: var(--primary-contrast);
+    text-decoration: none;
 }
 
 /* ==========================================================================
@@ -357,7 +354,6 @@ form {
 .theme-toggle-btn:hover {
     background-color: var(--border-color);
     color: var(--text-primary);
-    transform: translateY(-1px);
 }
 
 .theme-toggle-btn:focus-visible {
@@ -466,8 +462,6 @@ form {
 
 .theme-option-btn:hover {
     border-color: var(--primary);
-    transform: translateY(-2px);
-    box-shadow: var(--card-shadow-hover);
 }
 
 .theme-option-btn.active {

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Student Portal</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+
+    <!-- Simple Top Navigation -->
+    <header class="simple-navbar">
+        <h2>Student Portal</h2>
+        <div class="simple-nav-right">
+            <a href="home.html" style="font-size: 13px; margin-right: 10px;">Home</a>
+            <button id="theme-toggle" class="theme-toggle-btn" type="button" aria-label="Toggle theme" title="Toggle theme">
+                <span class="theme-toggle-track">
+                    <span class="theme-toggle-thumb">
+                        <svg class="theme-icon sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="5"></circle>
+                            <line x1="12" y1="1" x2="12" y2="3"></line>
+                            <line x1="12" y1="21" x2="12" y2="23"></line>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                            <line x1="1" y1="12" x2="3" y2="12"></line>
+                            <line x1="21" y1="12" x2="23" y2="12"></line>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                        </svg>
+                        <svg class="theme-icon moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                        </svg>
+                    </span>
+                </span>
+                <span class="theme-toggle-text">Theme</span>
+            </button>
+            <a href="signup.html" class="btn">Sign Up</a>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="simple-container">
+        <div class="card">
+            <h2 class="mb-10">Student Login</h2>
+            <p>Enter your credentials to access your dashboard.</p>
+
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-email">Email or Roll Number</label>
+                    <input type="text" id="login-email" name="loginEmail" placeholder="e.g. smit.ce@charusat.edu.in">
+                    <span class="error-msg" id="login-email-error">Please enter your email or roll number.</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" name="loginPassword" placeholder="Enter your password">
+                    <span class="error-msg" id="login-password-error">Please enter your password.</span>
+                </div>
+
+                <button type="submit" class="btn">Login</button>
+            </form>
+
+            <p style="margin-top: 15px; font-size: 13px;">
+                Don't have an account? <a href="signup.html">Sign Up here</a>
+            </p>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const email = document.getElementById('login-email');
+            const pass = document.getElementById('login-password');
+            const emailErr = document.getElementById('login-email-error');
+            const passErr = document.getElementById('login-password-error');
+
+            let valid = true;
+
+            if (!email.value.trim()) {
+                email.classList.add('input-error');
+                emailErr.classList.add('show');
+                valid = false;
+            } else {
+                email.classList.remove('input-error');
+                emailErr.classList.remove('show');
+            }
+
+            if (!pass.value.trim()) {
+                pass.classList.add('input-error');
+                passErr.classList.add('show');
+                valid = false;
+            } else {
+                pass.classList.remove('input-error');
+                passErr.classList.remove('show');
+            }
+
+            if (valid) {
+                alert('Login successful!');
+                window.location.href = 'index.html';
+            }
+        });
+    </script>
+    <script src="js/theme.js"></script>
+</body>
+</html>

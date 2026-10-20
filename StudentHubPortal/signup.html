@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Student Portal</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+
+    <!-- Simple Top Navigation -->
+    <header class="simple-navbar">
+        <h2>Student Portal</h2>
+        <div class="simple-nav-right">
+            <a href="home.html" style="font-size: 13px; margin-right: 10px;">Home</a>
+            <button id="theme-toggle" class="theme-toggle-btn" type="button" aria-label="Toggle theme" title="Toggle theme">
+                <span class="theme-toggle-track">
+                    <span class="theme-toggle-thumb">
+                        <svg class="theme-icon sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="5"></circle>
+                            <line x1="12" y1="1" x2="12" y2="3"></line>
+                            <line x1="12" y1="21" x2="12" y2="23"></line>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                            <line x1="1" y1="12" x2="3" y2="12"></line>
+                            <line x1="21" y1="12" x2="23" y2="12"></line>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                        </svg>
+                        <svg class="theme-icon moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                        </svg>
+                    </span>
+                </span>
+                <span class="theme-toggle-text">Theme</span>
+            </button>
+            <a href="login.html" class="btn">Login</a>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="simple-container">
+        <div class="card">
+            <h2 class="mb-10">Student Registration</h2>
+            <p>Please fill out this form to register your account.</p>
+
+            <form id="signup-form">
+                
+                <!-- First Name -->
+                <div class="form-group">
+                    <label for="first-name">First Name</label>
+                    <input type="text" id="first-name" name="firstName" placeholder="Enter First Name">
+                    <span class="error-msg" id="first-name-error">Please enter your first name.</span>
+                </div>
+
+                <!-- Last Name -->
+                <div class="form-group">
+                    <label for="last-name">Last Name</label>
+                    <input type="text" id="last-name" name="lastName" placeholder="Enter Last Name">
+                    <span class="error-msg" id="last-name-error">Please enter your last name.</span>
+                </div>
+
+                <!-- Email ID -->
+                <div class="form-group">
+                    <label for="email">Email ID</label>
+                    <input type="email" id="email" name="email" placeholder="Enter Email Address">
+                    <span class="error-msg" id="email-error">Please enter a valid email address.</span>
+                </div>
+
+                <!-- Gender -->
+                <div class="form-group">
+                    <label>Gender</label>
+                    <div class="gender-options">
+                        <label><input type="radio" name="gender" value="Male"> Male</label>
+                        <label><input type="radio" name="gender" value="Female"> Female</label>
+                        <label><input type="radio" name="gender" value="Other"> Other</label>
+                    </div>
+                    <span class="error-msg" id="gender-error">Please select your gender.</span>
+                </div>
+
+                <!-- Department -->
+                <div class="form-group">
+                    <label for="department">Department</label>
+                    <select id="department" name="department">
+                        <option value="">-- Select Department --</option>
+                        <option value="Computer Engineering">Computer Engineering</option>
+                        <option value="Information Technology">Information Technology</option>
+                        <option value="Computer Science">Computer Science & Engineering</option>
+                        <option value="Mechanical Engineering">Mechanical Engineering</option>
+                        <option value="Civil Engineering">Civil Engineering</option>
+                        <option value="Electrical Engineering">Electrical Engineering</option>
+                    </select>
+                    <span class="error-msg" id="department-error">Please select your department.</span>
+                </div>
+
+                <!-- Mobile Number -->
+                <div class="form-group">
+                    <label for="mobile">Mobile Number</label>
+                    <input type="text" id="mobile" name="mobile" placeholder="Enter 10-digit mobile number">
+                    <span class="error-msg" id="mobile-error">Please enter a valid 10-digit mobile number.</span>
+                </div>
+
+                <!-- Institute -->
+                <div class="form-group">
+                    <label for="institute">Institute</label>
+                    <select id="institute" name="institute">
+                        <option value="">-- Select Institute --</option>
+                        <option value="CSPIT">CSPIT</option>
+                        <option value="DEPSTAR">DEPSTAR</option>
+                        <option value="RPCP">RPCP</option>
+                        <option value="CMPICA">CMPICA</option>
+                        <option value="I2IM">I2IM</option>
+                        <option value="PDPIAS">PDPIAS</option>
+                    </select>
+                    <span class="error-msg" id="institute-error">Please select your institute.</span>
+                </div>
+
+                <!-- Academic Year -->
+                <div class="form-group">
+                    <label for="academic-year">Academic Year</label>
+                    <select id="academic-year" name="academicYear">
+                        <option value="">-- Select Academic Year --</option>
+                        <option value="2026-27">2026-27</option>
+                        <option value="2025-26">2025-26</option>
+                        <option value="2024-25">2024-25</option>
+                        <option value="2023-24">2023-24</option>
+                    </select>
+                    <span class="error-msg" id="academic-year-error">Please select academic year.</span>
+                </div>
+
+                <!-- Password -->
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter Password (minimum 6 characters)">
+                    <span class="error-msg" id="password-error">Password must be at least 6 characters.</span>
+                </div>
+
+                <button type="submit" class="btn">Sign Up</button>
+            </form>
+
+            <p style="margin-top: 15px; font-size: 13px;">
+                Already have an account? <a href="login.html">Login here</a>
+            </p>
+        </div>
+    </main>
+
+    <!-- Form Validation Script -->
+    <script src="js/signup-validation.js"></script>
+    <script src="js/theme.js"></script>
+</body>
+</html>

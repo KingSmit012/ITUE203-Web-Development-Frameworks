@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Student Portal</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+
+    <!-- 1. Notification Banner Component -->
+    <div id="notification-banner" class="notification-banner">
+        <div class="banner-content">
+            <span class="banner-tag">Notice</span>
+            <span> Mid-term examinations for Semester 3 will commence from 1st August 2026.</span>
+            <button type="button" class="btn btn-sm" data-modal-open="announcement-modal" style="padding: 2px 8px; font-size: 11px; margin-left: 8px;">View Circular</button>
+        </div>
+        <button id="banner-close-btn" class="banner-close-btn" type="button" title="Dismiss notification" aria-label="Close notification">&times;</button>
+    </div>
+
+    <!-- Simple Top Navigation with Hamburger Menu & Theme Switcher -->
+    <header class="simple-navbar">
+        <h2>Student Portal</h2>
+
+        <!-- 2. Hamburger Menu Button for Mobile Screens -->
+        <button id="hamburger-btn" class="hamburger-btn" type="button" aria-label="Toggle navigation menu" aria-expanded="false">
+            &#9776;
+        </button>
+
+        <div id="simple-nav-menu" class="simple-nav-right">
+            <a href="index.html" style="font-size: 13px;">Dashboard Demo</a>
+            
+            <!-- 3. Light/Dark Theme Switcher Component -->
+            <button id="theme-toggle" class="theme-toggle-btn" type="button" aria-label="Toggle theme" title="Toggle theme">
+                <span class="theme-toggle-track">
+                    <span class="theme-toggle-thumb">
+                        <svg class="theme-icon sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="5"></circle>
+                            <line x1="12" y1="1" x2="12" y2="3"></line>
+                            <line x1="12" y1="21" x2="12" y2="23"></line>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                            <line x1="1" y1="12" x2="3" y2="12"></line>
+                            <line x1="21" y1="12" x2="23" y2="12"></line>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                        </svg>
+                        <svg class="theme-icon moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                        </svg>
+                    </span>
+                </span>
+                <span class="theme-toggle-text">Theme</span>
+            </button>
+
+            <!-- Login & Sign Up Buttons Available at Homepage -->
+            <a href="login.html" class="btn">Login</a>
+            <a href="signup.html" class="btn">Sign Up</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="simple-home">
+
+        <!-- Welcome Card -->
+        <div class="card">
+            <h1>Welcome to Student Portal</h1>
+            <p>Academic Year 2026-27 | CHARUSAT University</p>
+            <p>Welcome to the official student academic portal. Access your student dashboard, view your timetable, check course attendance, and see your exam results.</p>
+            
+            <div class="home-buttons">
+                <a href="login.html" class="btn">Login</a>
+                <a href="signup.html" class="btn">Sign Up</a>
+                <a href="index.html" class="btn">View Dashboard</a>
+                <button type="button" class="btn" data-modal-open="announcement-modal">Notice Popup</button>
+            </div>
+        </div>
+
+        <!-- 4. Dynamic Education Image Slider Component -->
+        <div class="card" style="padding: 12px;">
+            <h3 class="mb-10" style="text-align: left; padding: 0 6px;">Campus Highlights & Infrastructure</h3>
+            
+            <div id="slider-container" class="slider-container">
+                <div id="slider-track" class="slider-track">
+                    <!-- Slide 1 -->
+                    <div class="slide">
+                        <img src="images/college_campus.jpg" alt="University Campus Building">
+                        <div class="slide-caption">CHARUSAT University Campus - Academic Year 2026-27</div>
+                    </div>
+                    <!-- Slide 2 -->
+                    <div class="slide">
+                        <img src="images/campus_library.jpg" alt="University Central Library">
+                        <div class="slide-caption">Central Library & Digital Knowledge Resource Center</div>
+                    </div>
+                    <!-- Slide 3 -->
+                    <div class="slide">
+                        <img src="images/college_classroom.jpg" alt="Computer Engineering Lab">
+                        <div class="slide-caption">Computer Engineering Laboratory & Collaborative Workspaces</div>
+                    </div>
+                </div>
+
+                <!-- Slider Navigation Arrows -->
+                <button id="slider-prev" class="slider-btn slider-prev" type="button" aria-label="Previous slide">&#10094;</button>
+                <button id="slider-next" class="slider-btn slider-next" type="button" aria-label="Next slide">&#10095;</button>
+            </div>
+
+            <!-- Slider Dots Indicators -->
+            <div id="slider-dots" class="slider-dots"></div>
+        </div>
+
+        <!-- Features Overview Card -->
+        <div class="card" style="text-align: left;">
+            <h3 class="mb-10">Portal Features</h3>
+            <ul style="padding-left: 20px; line-height: 1.8;">
+                <li><b>Dashboard:</b> Overview of active courses, attendance, and notices.</li>
+                <li><b>Attendance:</b> Subject-wise attendance tracking with percentage.</li>
+                <li><b>Courses:</b> Enrolled subjects, credits, and syllabus details.</li>
+                <li><b>Timetable:</b> Daily lecture and laboratory schedules.</li>
+                <li><b>Exams & Results:</b> Mid-term dates, final exam results, and SGPA.</li>
+                <li><b>Fees:</b> Fee payment status and receipts.</li>
+            </ul>
+        </div>
+
+        <!-- 5. Collapsible FAQ (Accordion) Component -->
+        <div class="card" style="text-align: left;">
+            <h3 class="mb-10">Frequently Asked Questions (FAQ)</h3>
+            <p style="font-size: 13px; color: var(--text-muted);">Click on any question below to expand or collapse the answer.</p>
+
+            <div class="faq-list">
+                <!-- FAQ Item 1 -->
+                <div class="faq-item">
+                    <button type="button" class="faq-question" aria-expanded="false">
+                        <span>How do I check my subject-wise attendance?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>You can check your attendance by navigating to the <b>Attendance</b> tab from your Dashboard sidebar. It displays your overall percentage and subject-wise attended vs total lectures.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="faq-item">
+                    <button type="button" class="faq-question" aria-expanded="false">
+                        <span>When will mid-term examination dates be announced?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Mid-term examinations for Semester 3 are scheduled to start from <b>1st August 2026</b>. You can review the complete date sheet in the <b>Exams</b> module.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="faq-item">
+                    <button type="button" class="faq-question" aria-expanded="false">
+                        <span>How do I submit pending assignments?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Visit the <b>Assignments</b> section from the sidebar. Select your active course (e.g. FDSA, OOP, DM) and upload your assignment files before the submission deadline.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="faq-item">
+                    <button type="button" class="faq-question" aria-expanded="false">
+                        <span>Where can I verify my tuition fee payment status?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Open the <b>Fees</b> tab to view your payment receipt status, term fee breakdown, and transaction reference numbers.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p class="text-center" style="color: var(--text-muted); font-size: 12px; margin-top: 30px;">
+            &copy; 2026-27 Student Portal. All rights reserved.
+        </p>
+
+    </main>
+
+    <!-- 6. Modal Popup Component -->
+    <div id="announcement-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3 id="modal-title"> University Academic Circular</h3>
+                <button class="modal-close-btn" type="button" data-modal-close aria-label="Close dialog">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p><b>Subject:</b> Mid-Term Examination Schedule - Academic Year 2026-27</p>
+                <p>All 3rd Semester Computer Engineering and IT students are hereby informed that the mid-semester internal examinations will commence from <b>1st August 2026</b>.</p>
+                <ul style="padding-left: 20px; margin: 10px 0;">
+                    <li>Hall tickets will be generated on <b>25th July 2026</b>.</li>
+                    <li>Students must maintain minimum 75% attendance to appear in exams.</li>
+                    <li>Seating arrangement will be posted in the Examination section.</li>
+                </ul>
+                <p>For any queries, please contact your academic mentor or department office.</p>
+            </div>
+            <div class="modal-footer">
+                <a href="exams.html" class="btn" style="margin-right: 6px;">Go to Exams Page</a>
+                <button type="button" class="btn" data-modal-close>Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dynamic Components JavaScript -->
+    <script src="js/components.js"></script>
+    <script src="js/theme.js"></script>
+</body>
+</html>

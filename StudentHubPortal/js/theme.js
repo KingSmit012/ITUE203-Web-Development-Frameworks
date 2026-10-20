@@ -1,8 +1,3 @@
-/**
- * Student Hub Portal - Theme Management System
- * Handles Dark and Light mode toggling with persistent state across all pages.
- */
-
 (function () {
     'use strict';
 
