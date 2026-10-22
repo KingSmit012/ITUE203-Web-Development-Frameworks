@@ -528,3 +528,44 @@
 }
 
 
+/* JSON-generated student and event cards */
+
+#students-list,
+#events-list {
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(220px, 1fr)
+    );
+    gap: 16px;
+    margin-top: 16px;
+}
+
+#students-list .student-json-card,
+#events-list .event-json-card {
+    margin-bottom: 0;
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.student-avatar {
+    width: 76px;
+    height: 76px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid var(--border-color);
+    margin-bottom: 12px;
+}
+
+.student-json-card h3,
+.event-json-card h3 {
+    color: var(--primary);
+    overflow-wrap: anywhere;
+}
+
+.student-json-card p,
+.event-json-card p {
+    font-size: 13px;
+    line-height: 1.6;
+}
+

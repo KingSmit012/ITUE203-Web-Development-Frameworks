@@ -13,7 +13,7 @@
     <div id="notification-banner" class="notification-banner">
         <div class="banner-content">
             <span class="banner-tag">Notice</span>
-            <span> Mid-term examinations for Semester 3 will commence from 1st August 2026.</span>
+            <span id="notice-banner-text">Loading notices...</span>
             <button type="button" class="btn btn-sm" data-modal-open="announcement-modal" style="padding: 2px 8px; font-size: 11px; margin-left: 8px;">View Circular</button>
         </div>
         <button id="banner-close-btn" class="banner-close-btn" type="button" title="Dismiss notification" aria-label="Close notification">&times;</button>
@@ -109,6 +109,16 @@
             <div id="slider-dots" class="slider-dots"></div>
         </div>
 
+        <!-- Events loaded from events.json -->
+            <div class="card" style="text-align: left;">
+                <h3>Upcoming Events</h3>
+                <p>Explore activities and events on campus.</p>
+
+                <div id="events-list">
+                    <p>Loading events...</p>
+                </div>
+            </div>
+
         <!-- Features Overview Card -->
         <div class="card" style="text-align: left;">
             <h3 class="mb-10">Portal Features</h3>
@@ -127,50 +137,8 @@
             <h3 class="mb-10">Frequently Asked Questions (FAQ)</h3>
             <p style="font-size: 13px; color: var(--text-muted);">Click on any question below to expand or collapse the answer.</p>
 
-            <div class="faq-list">
-                <!-- FAQ Item 1 -->
-                <div class="faq-item">
-                    <button type="button" class="faq-question" aria-expanded="false">
-                        <span>How do I check my subject-wise attendance?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>You can check your attendance by navigating to the <b>Attendance</b> tab from your Dashboard sidebar. It displays your overall percentage and subject-wise attended vs total lectures.</p>
-                    </div>
-                </div>
-
-                <!-- FAQ Item 2 -->
-                <div class="faq-item">
-                    <button type="button" class="faq-question" aria-expanded="false">
-                        <span>When will mid-term examination dates be announced?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Mid-term examinations for Semester 3 are scheduled to start from <b>1st August 2026</b>. You can review the complete date sheet in the <b>Exams</b> module.</p>
-                    </div>
-                </div>
-
-                <!-- FAQ Item 3 -->
-                <div class="faq-item">
-                    <button type="button" class="faq-question" aria-expanded="false">
-                        <span>How do I submit pending assignments?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Visit the <b>Assignments</b> section from the sidebar. Select your active course (e.g. FDSA, OOP, DM) and upload your assignment files before the submission deadline.</p>
-                    </div>
-                </div>
-
-                <!-- FAQ Item 4 -->
-                <div class="faq-item">
-                    <button type="button" class="faq-question" aria-expanded="false">
-                        <span>Where can I verify my tuition fee payment status?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Open the <b>Fees</b> tab to view your payment receipt status, term fee breakdown, and transaction reference numbers.</p>
-                    </div>
-                </div>
+            <div class="faq-list" id="faq-list">
+                <p>Loading FAQs...</p>
             </div>
         </div>
 
@@ -187,15 +155,8 @@
                 <h3 id="modal-title"> University Academic Circular</h3>
                 <button class="modal-close-btn" type="button" data-modal-close aria-label="Close dialog">&times;</button>
             </div>
-            <div class="modal-body">
-                <p><b>Subject:</b> Mid-Term Examination Schedule - Academic Year 2026-27</p>
-                <p>All 3rd Semester Computer Engineering and IT students are hereby informed that the mid-semester internal examinations will commence from <b>1st August 2026</b>.</p>
-                <ul style="padding-left: 20px; margin: 10px 0;">
-                    <li>Hall tickets will be generated on <b>25th July 2026</b>.</li>
-                    <li>Students must maintain minimum 75% attendance to appear in exams.</li>
-                    <li>Seating arrangement will be posted in the Examination section.</li>
-                </ul>
-                <p>For any queries, please contact your academic mentor or department office.</p>
+            <div class="modal-body" id="notice-modal-body">
+                <p>Loading notice details...</p>
             </div>
             <div class="modal-footer">
                 <a href="exams.html" class="btn" style="margin-right: 6px;">Go to Exams Page</a>
@@ -207,5 +168,6 @@
     <!-- Dynamic Components JavaScript -->
     <script src="js/components.js"></script>
     <script src="js/theme.js"></script>
+    <script src="js/json-data.js"></script>
 </body>
 </html>

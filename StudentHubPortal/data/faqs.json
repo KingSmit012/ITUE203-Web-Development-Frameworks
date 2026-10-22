@@ -1,0 +1,110 @@
+[
+  {
+    "id": "FAQ-001",
+    "category": "Attendance",
+    "question": "How is my minimum attendance calculated and what happens if it falls below 75%?",
+    "answer": "Attendance is calculated subject-wise across theory lectures and laboratory practical sessions. The university mandates a minimum of 75% overall aggregate attendance to be eligible to sit for university end-semester examinations. If your attendance falls below 75%, a formal warning notice is issued to your registered guardian, and you may be placed on the condonation list subject to medical proof.",
+    "helpfulCount": 142,
+    "lastUpdated": "2026-07-20",
+    "tags": ["attendance", "75%", "eligibility", "exam"]
+  },
+  {
+    "id": "FAQ-002",
+    "category": "Examination",
+    "question": "Where can I view my mid-term exam schedule, seating plan, and hall ticket?",
+    "answer": "You can view your examination dates in the 'Exams' module accessible from your left sidebar. Digital hall tickets are issued approximately 5-7 days prior to exam commencement under your student profile. Ensure your tuition fee dues are cleared to unlock hall ticket generation.",
+    "helpfulCount": 118,
+    "lastUpdated": "2026-07-18",
+    "tags": ["exams", "hall ticket", "schedule", "seating"]
+  },
+  {
+    "id": "FAQ-003",
+    "category": "Academic",
+    "question": "How do I submit pending assignments and verify if the faculty has evaluated them?",
+    "answer": "Navigate to the 'Assignments' tab in your portal. Each enrolled subject (e.g., FDSA, OOP, Discrete Math) displays open assignments, due dates, submission status, and maximum marks. You can upload ZIP/PDF solutions. Once graded, your faculty's comments and marks will automatically populate in your assignment history.",
+    "helpfulCount": 97,
+    "lastUpdated": "2026-07-15",
+    "tags": ["assignments", "submission", "evaluation", "grades"]
+  },
+  {
+    "id": "FAQ-004",
+    "category": "Fees",
+    "question": "Can I pay semester fees in installments or through online UPI/NetBanking?",
+    "answer": "Yes, semester fees can be paid via integrated online gateways including UPI, NetBanking, Debit/Credit cards, or through SBI Collect NEFT/RTGS challans. Installment payment requests require prior endorsement from the Head of Department and the Academic Dean.",
+    "helpfulCount": 85,
+    "lastUpdated": "2026-07-12",
+    "tags": ["fees", "payment", "upi", "installments"]
+  },
+  {
+    "id": "FAQ-005",
+    "category": "Technical",
+    "question": "How do I switch between Light and Dark mode on the portal?",
+    "answer": "You can toggle themes at any time by clicking the Theme button located in the top navigation bar or under 'Settings' > 'Appearance'. Your preferred theme is stored in your browser's localStorage and automatically synced across all open portal tabs.",
+    "helpfulCount": 73,
+    "lastUpdated": "2026-07-10",
+    "tags": ["theme", "dark mode", "light mode", "settings"]
+  },
+  {
+    "id": "FAQ-006",
+    "category": "Academic",
+    "question": "How is the Semester Grade Point Average (SGPA) and Cumulative GPA (CGPA) calculated?",
+    "answer": "SGPA is calculated as the sum of products of course credits and numerical grade points divided by total semester credits: SGPA = Σ(Credit × Grade Point) / Σ(Credits). CGPA is the weighted aggregate average of all semesters completed to date.",
+    "helpfulCount": 160,
+    "lastUpdated": "2026-07-08",
+    "tags": ["sgpa", "cgpa", "grading", "marks"]
+  },
+  {
+    "id": "FAQ-007",
+    "category": "Library",
+    "question": "How can I access IEEE Xplore and Springer research journals from my home network?",
+    "answer": "Central Library digital subscriptions can be accessed off-campus using the university OpenAthens Single Sign-On (SSO). Enter your CHARUSAT student email ID (@charusat.edu.in) on the library proxy portal to gain full-text PDF download privileges.",
+    "helpfulCount": 64,
+    "lastUpdated": "2026-07-05",
+    "tags": ["library", "ieee", "research", "proxy"]
+  },
+  {
+    "id": "FAQ-008",
+    "category": "Examination",
+    "question": "What is the procedure for paper re-evaluation or photocopy verification of answer scripts?",
+    "answer": "Students dissatisfied with their end-semester marks can apply for re-checking or answer script photocopy inspection within 10 days of results declaration. A nominal fee of ₹300 per subject applies via the Examination Re-evaluation window on this portal.",
+    "helpfulCount": 92,
+    "lastUpdated": "2026-07-01",
+    "tags": ["rechecking", "reevaluation", "marksheet", "results"]
+  },
+  {
+    "id": "FAQ-009",
+    "category": "Technical",
+    "question": "What should I do if I forget my student portal password or get locked out?",
+    "answer": "Click on the 'Forgot Password' link on the login page to receive a password reset token on your registered mobile number and university email. Alternatively, visit the CSPIT Computer Center Helpdesk (Room 104) with your valid student ID card.",
+    "helpfulCount": 51,
+    "lastUpdated": "2026-06-25",
+    "tags": ["password", "reset", "login", "helpdesk"]
+  },
+  {
+    "id": "FAQ-010",
+    "category": "Attendance",
+    "question": "Are medical leaves and sports participation absences counted towards attendance?",
+    "answer": "Yes, duty leaves (DL) for authorized sports tournaments, cultural hackathons, or certified medical hospitalizations are credited, provided the official medical certificate and HoD sanction form are submitted within 7 working days of returning to campus.",
+    "helpfulCount": 110,
+    "lastUpdated": "2026-06-20",
+    "tags": ["medical leave", "duty leave", "sports", "excuse"]
+  },
+  {
+    "id": "FAQ-011",
+    "category": "Fees",
+    "question": "Where can I download my official university fee receipts for tax/scholarship reimbursement?",
+    "answer": "Navigate to the 'Fees' tab from the sidebar. Under the 'Payment History' section, click the 'Download PDF Receipt' button adjacent to your paid transaction record. The digital receipt contains the authorized university seal and transaction UTR number.",
+    "helpfulCount": 88,
+    "lastUpdated": "2026-06-15",
+    "tags": ["receipt", "tax", "scholarship", "invoice"]
+  },
+  {
+    "id": "FAQ-012",
+    "category": "Academic",
+    "question": "How can I register for Open Elective or Audit courses in Semester 3?",
+    "answer": "Elective course pre-registration takes place at the start of each academic semester through the 'Courses' module. Students can select interdisciplinary electives such as Cyber Law, Financial Literacy, or German Language based on seat availability and mentor guidance.",
+    "helpfulCount": 79,
+    "lastUpdated": "2026-06-10",
+    "tags": ["electives", "registration", "credits", "curriculum"]
+  }
+]
