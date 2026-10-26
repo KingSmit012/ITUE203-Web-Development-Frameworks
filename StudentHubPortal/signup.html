@@ -45,8 +45,9 @@
             <h2 class="mb-10">Student Registration</h2>
             <p>Please fill out this form to register your account.</p>
 
-            <form id="signup-form">
+            <form id="signup-form" action="register.php" method="POST">
                 
+                <div id="form-message" role="status" aria-live="polite"></div>
                 <!-- First Name -->
                 <div class="form-group">
                     <label for="first-name">First Name</label>
@@ -146,7 +147,6 @@
     </main>
 
     <!-- Form Validation Script -->
-    <script src="js/signup-validation.js"></script>
     <script src="js/theme.js"></script>
 </body>
 </html>
