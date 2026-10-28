@@ -45,27 +45,33 @@
             <h2 class="mb-10">Student Registration</h2>
             <p>Please fill out this form to register your account.</p>
 
-            <form id="signup-form" action="register.php" method="POST">
-                
+            <form id="signup-form" action="register.php" method="POST">                
                 <div id="form-message" role="status" aria-live="polite"></div>
                 <!-- First Name -->
                 <div class="form-group">
                     <label for="first-name">First Name</label>
-                    <input type="text" id="first-name" name="firstName" placeholder="Enter First Name">
+                       <input type="text" id="first-name" name="firstName" placeholder="Enter First Name" >
                     <span class="error-msg" id="first-name-error">Please enter your first name.</span>
                 </div>
 
                 <!-- Last Name -->
                 <div class="form-group">
                     <label for="last-name">Last Name</label>
-                    <input type="text" id="last-name" name="lastName" placeholder="Enter Last Name">
+                    <input type="text" id="last-name" name="lastName" placeholder="Enter Last Name" >
                     <span class="error-msg" id="last-name-error">Please enter your last name.</span>
+                </div>
+
+                <!-- Username -->
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Choose a Username (e.g. smit_26)" >
+                    <span class="error-msg" id="username-error">Username must be at least 3 characters (letters, numbers, and underscores only).</span>
                 </div>
 
                 <!-- Email ID -->
                 <div class="form-group">
                     <label for="email">Email ID</label>
-                    <input type="email" id="email" name="email" placeholder="Enter Email Address">
+                    <input type="email" id="email" name="email" placeholder="Enter Email Address" >
                     <span class="error-msg" id="email-error">Please enter a valid email address.</span>
                 </div>
 
@@ -147,6 +153,7 @@
     </main>
 
     <!-- Form Validation Script -->
+    <script src="js/signup-validation.js"></script>
     <script src="js/theme.js"></script>
 </body>
 </html>

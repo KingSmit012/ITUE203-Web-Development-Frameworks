@@ -2,131 +2,181 @@ document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('signup-form');
     if (!form) return;
 
+    // Input elements
+    const firstName = document.getElementById('first-name');
+    const lastName = document.getElementById('last-name');
+    const username = document.getElementById('username');
+    const email = document.getElementById('email');
+    const genderRadios = document.querySelectorAll('input[name="gender"]');
+    const department = document.getElementById('department');
+    const mobile = document.getElementById('mobile');
+    const institute = document.getElementById('institute');
+    const academicYear = document.getElementById('academic-year');
+    const password = document.getElementById('password');
+
+    // Error message elements
+    const firstNameErr = document.getElementById('first-name-error');
+    const lastNameErr = document.getElementById('last-name-error');
+    const usernameErr = document.getElementById('username-error');
+    const emailErr = document.getElementById('email-error');
+    const genderErr = document.getElementById('gender-error');
+    const departmentErr = document.getElementById('department-error');
+    const mobileErr = document.getElementById('mobile-error');
+    const instituteErr = document.getElementById('institute-error');
+    const academicYearErr = document.getElementById('academic-year-error');
+    const passwordErr = document.getElementById('password-error');
+
+    // Helper functions to show/hide errors
+    function showError(input, errorElement) {
+        if (input) input.classList.add('input-error');
+        if (errorElement) errorElement.classList.add('show');
+    }
+
+    function clearError(input, errorElement) {
+        if (input) input.classList.remove('input-error');
+        if (errorElement) errorElement.classList.remove('show');
+    }
+
+    // Auto-clear error when user types or changes an input
+    const inputsWithErrors = [
+        { input: firstName, error: firstNameErr },
+        { input: lastName, error: lastNameErr },
+        { input: username, error: usernameErr },
+        { input: email, error: emailErr },
+        { input: department, error: departmentErr },
+        { input: mobile, error: mobileErr },
+        { input: institute, error: instituteErr },
+        { input: academicYear, error: academicYearErr },
+        { input: password, error: passwordErr }
+    ];
+
+    inputsWithErrors.forEach(function (item) {
+        if (item.input) {
+            item.input.addEventListener('input', function () {
+                clearError(item.input, item.error);
+            });
+            item.input.addEventListener('change', function () {
+                clearError(item.input, item.error);
+            });
+        }
+    });
+
+    genderRadios.forEach(function (radio) {
+        radio.addEventListener('change', function () {
+            if (genderErr) genderErr.classList.remove('show');
+        });
+    });
+
+    // Form submission validation
     form.addEventListener('submit', function (e) {
-        e.preventDefault();
-
-        // Get input elements
-        const firstName = document.getElementById('first-name');
-        const lastName = document.getElementById('last-name');
-        const email = document.getElementById('email');
-        const genderRadios = document.querySelectorAll('input[name="gender"]');
-        const department = document.getElementById('department');
-        const mobile = document.getElementById('mobile');
-        const institute = document.getElementById('institute');
-        const academicYear = document.getElementById('academic-year');
-        const password = document.getElementById('password');
-
-        // Get error elements
-        const firstNameErr = document.getElementById('first-name-error');
-        const lastNameErr = document.getElementById('last-name-error');
-        const emailErr = document.getElementById('email-error');
-        const genderErr = document.getElementById('gender-error');
-        const departmentErr = document.getElementById('department-error');
-        const mobileErr = document.getElementById('mobile-error');
-        const instituteErr = document.getElementById('institute-error');
-        const academicYearErr = document.getElementById('academic-year-error');
-        const passwordErr = document.getElementById('password-error');
-
         let isValid = true;
+        let firstInvalidField = null;
 
-        // 1. First Name Validation
-        if (!firstName.value.trim()) {
-            firstName.classList.add('input-error');
-            firstNameErr.classList.add('show');
+        // 1. First Name Validation (letters and spaces only)
+        const namePattern = /^[a-zA-Z\s]+$/;
+        if (!firstName.value.trim() || !namePattern.test(firstName.value.trim())) {
+            showError(firstName, firstNameErr);
             isValid = false;
+            if (!firstInvalidField) firstInvalidField = firstName;
         } else {
-            firstName.classList.remove('input-error');
-            firstNameErr.classList.remove('show');
+            clearError(firstName, firstNameErr);
         }
 
-        // 2. Last Name Validation
-        if (!lastName.value.trim()) {
-            lastName.classList.add('input-error');
-            lastNameErr.classList.add('show');
+        // 2. Last Name Validation (letters and spaces only)
+        if (!lastName.value.trim() || !namePattern.test(lastName.value.trim())) {
+            showError(lastName, lastNameErr);
             isValid = false;
+            if (!firstInvalidField) firstInvalidField = lastName;
         } else {
-            lastName.classList.remove('input-error');
-            lastNameErr.classList.remove('show');
+            clearError(lastName, lastNameErr);
         }
 
-        // 3. Email Validation
+        // 3. Username Validation (alphanumeric and underscore, 3-30 chars)
+        const usernamePattern = /^[a-zA-Z0-9_]{3,30}$/;
+        if (!username.value.trim() || !usernamePattern.test(username.value.trim())) {
+            showError(username, usernameErr);
+            isValid = false;
+            if (!firstInvalidField) firstInvalidField = username;
+        } else {
+            clearError(username, usernameErr);
+        }
+
+        // 4. Email Validation
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!email.value.trim() || !emailPattern.test(email.value.trim())) {
-            email.classList.add('input-error');
-            emailErr.classList.add('show');
+            showError(email, emailErr);
             isValid = false;
+            if (!firstInvalidField) firstInvalidField = email;
         } else {
-            email.classList.remove('input-error');
-            emailErr.classList.remove('show');
+            clearError(email, emailErr);
         }
 
-        // 4. Gender Validation
+        // 5. Gender Validation
         let genderSelected = false;
         genderRadios.forEach(function (radio) {
             if (radio.checked) genderSelected = true;
         });
         if (!genderSelected) {
-            genderErr.classList.add('show');
+            if (genderErr) genderErr.classList.add('show');
             isValid = false;
+            if (!firstInvalidField && genderRadios.length > 0) firstInvalidField = genderRadios[0];
         } else {
-            genderErr.classList.remove('show');
+            if (genderErr) genderErr.classList.remove('show');
         }
 
-        // 5. Department Validation
+        // 6. Department Validation
         if (!department.value) {
-            department.classList.add('input-error');
-            departmentErr.classList.add('show');
+            showError(department, departmentErr);
             isValid = false;
+            if (!firstInvalidField) firstInvalidField = department;
         } else {
-            department.classList.remove('input-error');
-            departmentErr.classList.remove('show');
+            clearError(department, departmentErr);
         }
 
-        // 6. Mobile Number Validation (10 digits)
+        // 7. Mobile Number Validation (exactly 10 digits)
         const mobilePattern = /^\d{10}$/;
         if (!mobile.value.trim() || !mobilePattern.test(mobile.value.trim())) {
-            mobile.classList.add('input-error');
-            mobileErr.classList.add('show');
+            showError(mobile, mobileErr);
             isValid = false;
+            if (!firstInvalidField) firstInvalidField = mobile;
         } else {
-            mobile.classList.remove('input-error');
-            mobileErr.classList.remove('show');
+            clearError(mobile, mobileErr);
         }
 
-        // 7. Institute Validation
+        // 8. Institute Validation
         if (!institute.value) {
-            institute.classList.add('input-error');
-            instituteErr.classList.add('show');
+            showError(institute, instituteErr);
             isValid = false;
+            if (!firstInvalidField) firstInvalidField = institute;
         } else {
-            institute.classList.remove('input-error');
-            instituteErr.classList.remove('show');
+            clearError(institute, instituteErr);
         }
 
-        // 8. Academic Year Validation
+        // 9. Academic Year Validation
         if (!academicYear.value) {
-            academicYear.classList.add('input-error');
-            academicYearErr.classList.add('show');
+            showError(academicYear, academicYearErr);
             isValid = false;
+            if (!firstInvalidField) firstInvalidField = academicYear;
         } else {
-            academicYear.classList.remove('input-error');
-            academicYearErr.classList.remove('show');
+            clearError(academicYear, academicYearErr);
         }
 
-        // 9. Password Validation (min 6 chars)
+        // 10. Password Validation (min 6 characters)
         if (!password.value || password.value.length < 6) {
-            password.classList.add('input-error');
-            passwordErr.classList.add('show');
+            showError(password, passwordErr);
             isValid = false;
+            if (!firstInvalidField) firstInvalidField = password;
         } else {
-            password.classList.remove('input-error');
-            passwordErr.classList.remove('show');
+            clearError(password, passwordErr);
         }
 
-        // Final submission check
-        if (isValid) {
-            alert('Registration Successful! Please login with your credentials.');
-            window.location.href = 'login.html';
+        // If any validation failed, stop form submission and focus first invalid input
+        if (!isValid) {
+            e.preventDefault();
+            if (firstInvalidField) {
+                firstInvalidField.focus();
+            }
         }
+        // If valid, the browser naturally submits the POST request to register.php!
     });
 });
