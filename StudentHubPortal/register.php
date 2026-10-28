@@ -248,7 +248,7 @@ if (empty($errors)) {
                 </span>
                 <span class="theme-toggle-text">Theme</span>
             </button>
-            <a href="login.html" class="btn">Login</a>
+            <a href="login.php" class="btn">Login</a>
         </div>
     </header>
 
@@ -270,7 +270,7 @@ if (empty($errors)) {
                 </div>
 
                 <div class="btn-group">
-                    <a class="btn" href="login.html">Proceed to Login</a>
+                    <a class="btn" href="login.php">Proceed to Login</a>
                     <a class="btn" href="home.html" style="background: transparent; border: 1px solid var(--border-color); color: var(--text-primary);">Back to Home</a>
                 </div>
 
