@@ -1,35 +1,54 @@
 <?php
+// admin_dashboard.php - Administrator Analytics & Overview
 require_once __DIR__ . '/auth.php';
 
-// Restrict access: Only users with role = 'admin' are permitted
+// Restrict access: Only administrators can view this dashboard
 require_login('admin');
 
 $currentUser = current_user();
 
-// Fetch admin statistics from MySQL
+// 1. Fetch live metrics from MySQL
 $totalUsers = 0;
 $totalStudents = 0;
 $totalEvents = 0;
 $totalRegistrations = 0;
 
 if ($uRes = $conn->query("SELECT COUNT(*) FROM users")) {
-    $totalUsers = $uRes->fetch_row()[0];
+    $totalUsers = (int)$uRes->fetch_row()[0];
 }
 if ($sRes = $conn->query("SELECT COUNT(*) FROM students")) {
-    $totalStudents = $sRes->fetch_row()[0];
+    $totalStudents = (int)$sRes->fetch_row()[0];
 }
 if ($eRes = $conn->query("SELECT COUNT(*) FROM events")) {
-    $totalEvents = $eRes->fetch_row()[0];
+    $totalEvents = (int)$eRes->fetch_row()[0];
 }
 if ($rRes = $conn->query("SELECT COUNT(*) FROM registrations")) {
-    $totalRegistrations = $rRes->fetch_row()[0];
+    $totalRegistrations = (int)$rRes->fetch_row()[0];
 }
 
-// Fetch recently registered users
-$recentUsers = [];
-$usersQuery = "SELECT user_id, username, email, role, first_name, last_name, department, created_at FROM users ORDER BY user_id DESC LIMIT 10";
-if ($res = $conn->query($usersQuery)) {
+// 2. Fetch Latest Event Registrations (Joined across registrations, students, and events)
+$latestRegistrations = [];
+$regSql = "
+    SELECT r.registration_id, r.registration_date, r.status,
+           s.first_name, s.last_name, s.email, s.department,
+           e.title AS event_title, e.event_date
+    FROM registrations r
+    LEFT JOIN students s ON r.student_id = s.student_id
+    LEFT JOIN events e ON r.event_id = e.event_id
+    ORDER BY r.registration_id DESC
+    LIMIT 8
+";
+if ($res = $conn->query($regSql)) {
     while ($row = $res->fetch_assoc()) {
+        $latestRegistrations[] = $row;
+    }
+}
+
+// 3. Fetch Latest User Signups (From users table)
+$recentUsers = [];
+$usersSql = "SELECT user_id, username, email, role, first_name, last_name, department, created_at FROM users ORDER BY user_id DESC LIMIT 6";
+if ($uRes = $conn->query($usersSql)) {
+    while ($row = $uRes->fetch_assoc()) {
         $recentUsers[] = $row;
     }
 }
@@ -44,7 +63,7 @@ if ($res = $conn->query($usersQuery)) {
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/pages.css">
     <style>
-        .admin-badge {
+        .role-badge-admin {
             display: inline-block;
             background: #dc2626;
             color: #ffffff;
@@ -54,9 +73,8 @@ if ($res = $conn->query($usersQuery)) {
             border-radius: 12px;
             text-transform: uppercase;
             margin-left: 6px;
-            vertical-align: middle;
         }
-        .student-badge {
+        .role-badge-student {
             display: inline-block;
             background: #2563eb;
             color: #ffffff;
@@ -66,131 +84,167 @@ if ($res = $conn->query($usersQuery)) {
             border-radius: 12px;
             text-transform: uppercase;
         }
+        .status-badge {
+            display: inline-block;
+            background: #ecfdf5;
+            color: #065f46;
+            border: 1px solid #a7f3d0;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
         .table-responsive {
             overflow-x: auto;
-            margin-top: 15px;
+            margin-top: 12px;
+        }
+        .quick-actions {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
         }
     </style>
 </head>
 <body>
 
-    <aside class="sidebar">
-        <div class="sidebar-header">
-            <h2>Admin Portal</h2>
-            <p>System Management</p>
-        </div>
-        <ul class="sidebar-menu">
-            <li><a href="admin_dashboard.php" class="active">Overview</a></li>
-            <li><a href="dashboard.php">Student View</a></li>
-            <li><a href="logout.php">Sign Out</a></li>
-        </ul>
-    </aside>
+    <!-- Dynamic Sidebar Menu (shows Admin Options) -->
+    <?php render_sidebar('admin_dashboard'); ?>
 
-    <!-- Top Navbar -->
-    <header class="top-navbar">
-        <span class="navbar-title">Admin Management</span>
-        <div class="navbar-right">
-            <button id="theme-toggle" class="theme-toggle-btn" type="button" aria-label="Toggle theme" title="Toggle theme">
-                <span class="theme-toggle-track">
-                    <span class="theme-toggle-thumb">
-                        <svg class="theme-icon sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="5"></circle>
-                            <line x1="12" y1="1" x2="12" y2="3"></line>
-                            <line x1="12" y1="21" x2="12" y2="23"></line>
-                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                            <line x1="1" y1="12" x2="3" y2="12"></line>
-                            <line x1="21" y1="12" x2="23" y2="12"></line>
-                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                        </svg>
-                        <svg class="theme-icon moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                        </svg>
-                    </span>
-                </span>
-                <span class="theme-toggle-text">Theme</span>
-            </button>
-            <span class="navbar-user">
-                <?= htmlspecialchars($currentUser['name'] ?: $currentUser['username'], ENT_QUOTES, 'UTF-8') ?>
-                <span class="admin-badge">ADMIN</span>
-            </span>
-            <a href="logout.php" class="btn btn-outline btn-sm" style="padding: 4px 10px; font-size: 11.5px;">Sign Out</a>
-        </div>
-    </header>
+    <!-- Dynamic Top Navbar with Theme Toggle -->
+    <?php render_top_navbar('Administrator Dashboard'); ?>
 
     <!-- Main Content -->
     <main class="main-content">
         <div class="page-header">
-            <h1>Admin Dashboard</h1>
-            <p>Welcome back, <strong><?= htmlspecialchars($currentUser['username'], ENT_QUOTES, 'UTF-8') ?></strong>. Role-based control active.</p>
+            <h1>Admin Overview & Analytics</h1>
+            <p>Welcome, <strong><?= htmlspecialchars($currentUser['name'] ?: $currentUser['username']) ?></strong>. Monitor users, students, events, and registrations.</p>
         </div>
 
-        <!-- Metric Cards -->
+        <!-- Quick Access Action Buttons -->
+        <div class="quick-actions">
+            <a href="students_manage.php" class="btn">Manage Students &rarr;</a>
+            <a href="events_manage.php" class="btn" style="background: #059669;">Manage Events &rarr;</a>
+            <a href="dashboard.php" class="btn" style="background: transparent; border: 1px solid var(--border-color); color: var(--text-primary);">View Student Portal &rarr;</a>
+        </div>
+
+        <!-- 1. Statistics Cards -->
         <div class="grid-4 dashboard-cards">
             <div class="card">
-                <h3><?= (int)$totalUsers ?></h3>
-                <p>Total Registered Users</p>
+                <h3><?= $totalUsers ?></h3>
+                <p>User Accounts</p>
             </div>
             <div class="card">
-                <h3><?= (int)$totalStudents ?></h3>
-                <p>Students Directory</p>
+                <h3><?= $totalStudents ?></h3>
+                <p>Student Directory</p>
             </div>
             <div class="card">
-                <h3><?= (int)$totalEvents ?></h3>
-                <p>Active Events</p>
+                <h3><?= $totalEvents ?></h3>
+                <p>Campus Events</p>
             </div>
             <div class="card">
-                <h3><?= (int)$totalRegistrations ?></h3>
-                <p>Event Signups</p>
+                <h3><?= $totalRegistrations ?></h3>
+                <p>Event Registrations</p>
             </div>
         </div>
 
-        <!-- Registered Users Table -->
-        <div class="card" style="margin-top: 24px;">
-            <h3>Recently Registered Accounts</h3>
-            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">Stored securely in MySQL <code>users</code> table.</p>
+        <!-- Two Column or Stacked Data Tables -->
+        <div style="margin-top: 24px; display: grid; grid-template-columns: 1fr; gap: 24px;">
 
-            <div class="table-responsive">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>User ID</th>
-                            <th>Username</th>
-                            <th>Full Name</th>
-                            <th>Email</th>
-                            <th>Role</th>
-                            <th>Department</th>
-                            <th>Registered At</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php if (empty($recentUsers)): ?>
+            <!-- 2. Latest Event Registrations -->
+            <div class="card" style="padding: 20px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h3 style="margin: 0;">Latest Event Registrations</h3>
+                    <span style="font-size: 12px; color: var(--text-muted);">Real-time signups from students</span>
+                </div>
+
+                <div class="table-responsive">
+                    <table>
+                        <thead>
                             <tr>
-                                <td colspan="7" style="text-align: center;">No registered users found.</td>
+                                <th>Reg ID</th>
+                                <th>Student Name</th>
+                                <th>Email</th>
+                                <th>Event Title</th>
+                                <th>Event Date</th>
+                                <th>Registration Date</th>
+                                <th>Status</th>
                             </tr>
-                        <?php else: ?>
-                            <?php foreach ($recentUsers as $u): ?>
+                        </thead>
+                        <tbody>
+                            <?php if (empty($latestRegistrations)): ?>
                                 <tr>
-                                    <td>#<?= (int)$u['user_id'] ?></td>
-                                    <td><strong><?= htmlspecialchars($u['username'], ENT_QUOTES, 'UTF-8') ?></strong></td>
-                                    <td><?= htmlspecialchars(trim(($u['first_name'] ?? '') . ' ' . ($u['last_name'] ?? '')) ?: '—', ENT_QUOTES, 'UTF-8') ?></td>
-                                    <td><?= htmlspecialchars($u['email'], ENT_QUOTES, 'UTF-8') ?></td>
-                                    <td>
-                                        <?php if (($u['role'] ?? '') === 'admin'): ?>
-                                            <span class="admin-badge">ADMIN</span>
-                                        <?php else: ?>
-                                            <span class="student-badge">STUDENT</span>
-                                        <?php endif; ?>
+                                    <td colspan="7" style="text-align: center; color: var(--text-muted); padding: 20px;">
+                                        No event registrations recorded yet. Students can register for events on <a href="events.php">Campus Events</a> page.
                                     </td>
-                                    <td><?= htmlspecialchars($u['department'] ?: '—', ENT_QUOTES, 'UTF-8') ?></td>
-                                    <td><?= htmlspecialchars($u['created_at'], ENT_QUOTES, 'UTF-8') ?></td>
                                 </tr>
-                            <?php endforeach; ?>
-                        <?php endif; ?>
-                    </tbody>
-                </table>
+                            <?php else: ?>
+                                <?php foreach ($latestRegistrations as $reg): ?>
+                                    <tr>
+                                        <td>#<?= (int)$reg['registration_id'] ?></td>
+                                        <td><strong><?= htmlspecialchars(trim(($reg['first_name'] ?? '') . ' ' . ($reg['last_name'] ?? '')) ?: 'Student') ?></strong></td>
+                                        <td><?= htmlspecialchars($reg['email'] ?? '—') ?></td>
+                                        <td><?= htmlspecialchars($reg['event_title'] ?? '—') ?></td>
+                                        <td><?= htmlspecialchars($reg['event_date'] ?? '—') ?></td>
+                                        <td><?= htmlspecialchars(substr($reg['registration_date'] ?? '', 0, 16)) ?></td>
+                                        <td><span class="status-badge"><?= htmlspecialchars($reg['status'] ?? 'Registered') ?></span></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
+
+            <!-- 3. Latest Registered User Accounts -->
+            <div class="card" style="padding: 20px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h3 style="margin: 0;">Recent User Accounts</h3>
+                    <span style="font-size: 12px; color: var(--text-muted);">Stored in MySQL <code>users</code> table</span>
+                </div>
+
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>User ID</th>
+                                <th>Username</th>
+                                <th>Full Name</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Department</th>
+                                <th>Registered At</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php if (empty($recentUsers)): ?>
+                                <tr>
+                                    <td colspan="7" style="text-align: center; color: var(--text-muted); padding: 20px;">No registered user accounts found.</td>
+                                </tr>
+                            <?php else: ?>
+                                <?php foreach ($recentUsers as $u): ?>
+                                    <tr>
+                                        <td>#<?= (int)$u['user_id'] ?></td>
+                                        <td><strong><?= htmlspecialchars($u['username']) ?></strong></td>
+                                        <td><?= htmlspecialchars(trim(($u['first_name'] ?? '') . ' ' . ($u['last_name'] ?? '')) ?: '—') ?></td>
+                                        <td><?= htmlspecialchars($u['email']) ?></td>
+                                        <td>
+                                            <?php if (($u['role'] ?? '') === 'admin'): ?>
+                                                <span class="role-badge-admin">ADMIN</span>
+                                            <?php else: ?>
+                                                <span class="role-badge-student">STUDENT</span>
+                                            <?php endif; ?>
+                                        </td>
+                                        <td><?= htmlspecialchars($u['department'] ?: '—') ?></td>
+                                        <td><?= htmlspecialchars($u['created_at']) ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
         </div>
     </main>
 

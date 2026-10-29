@@ -1,33 +1,26 @@
 <?php
 require_once __DIR__ . '/auth.php';
 
-// If user is already logged in, redirect them based on their role
-if (is_logged_in()) {
-    if (($_SESSION['role'] ?? 'student') === 'admin') {
-        header("Location: admin_dashboard.php");
-    } else {
-        header("Location: dashboard.php");
-    }
-    exit;
-}
-
 $loginError = "";
 $statusMessage = "";
 
 // Check for status messages in URL query string
 if (isset($_GET['error'])) {
     if ($_GET['error'] === 'unauthorized') {
-        $loginError = "Please log in to access your dashboard.";
+        $loginError = "Please log in to access the portal.";
     } elseif ($_GET['error'] === 'timeout') {
         $loginError = "Your session has expired due to inactivity. Please log in again.";
     } elseif ($_GET['error'] === 'access_denied') {
-        $loginError = "Access denied: You do not have permission to view that section.";
+        $loginError = "Access denied: Administrator privileges are required for that section.";
     }
 } elseif (isset($_GET['logout']) && $_GET['logout'] === 'success') {
     $statusMessage = "You have been successfully logged out.";
 }
 
-// Process login form submission
+// Check if already logged in for GET requests
+$alreadyLoggedInUser = is_logged_in() ? current_user() : null;
+
+// Process login form submission (POST)
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $loginIdentifier = trim($_POST["loginIdentifier"] ?? "");
     $password        = $_POST["loginPassword"] ?? "";
@@ -66,11 +59,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                     // 3. Handle optional secure Remember-Me token
                     if ($rememberMe) {
-                        // Generate a cryptographically secure 32-byte token
                         $plainToken = bin2hex(random_bytes(32));
                         $tokenHash  = hash('sha256', $plainToken);
 
-                        // Save the hashed token in database
                         $updateStmt = $conn->prepare("UPDATE users SET remember_token = ? WHERE user_id = ?");
                         if ($updateStmt) {
                             $updateStmt->bind_param("si", $tokenHash, $user["user_id"]);
@@ -78,7 +69,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             $updateStmt->close();
                         }
 
-                        // Store cookie: "userId:token" for 30 days (HttpOnly & SameSite)
                         $cookieValue = $user["user_id"] . ":" . $plainToken;
                         setcookie("remember_me", $cookieValue, [
                             "expires"  => time() + (86400 * 30),
@@ -90,7 +80,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                     $stmt->close();
 
-                    // 4. Role-based redirection
+                    // 4. Role-based redirection:
+                    // Admin -> admin_dashboard.php
+                    // Student -> dashboard.php
                     if (($user["role"] ?? "student") === "admin") {
                         header("Location: admin_dashboard.php");
                     } else {
@@ -148,6 +140,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             border-color: #059669;
             color: #6ee7b7;
         }
+        .alert-info {
+            background-color: #eff6ff;
+            border: 1px solid #bfdbfe;
+            color: #1e40af;
+        }
+        [data-theme="dark"] .alert-info {
+            background-color: rgba(30, 64, 175, 0.25);
+            border-color: #3b82f6;
+            color: #93c5fd;
+        }
         .remember-group {
             display: flex;
             align-items: center;
@@ -165,6 +167,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             cursor: pointer;
             margin: 0;
             font-weight: 400;
+        }
+        .credentials-hint {
+            margin-top: 20px;
+            padding: 12px;
+            background: var(--bg-surface-elevated, #f8fafc);
+            border: 1px dashed var(--border-color);
+            border-radius: 6px;
+            font-size: 12.5px;
+            line-height: 1.5;
         }
     </style>
 </head>
@@ -206,6 +217,24 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <h2 class="mb-10">Sign In to Student Portal</h2>
             <p>Enter your username or email address and password.</p>
 
+            <?php if ($alreadyLoggedInUser): ?>
+                <div class="alert-box alert-info">
+                    <strong>Currently Active Session:</strong> <?= htmlspecialchars($alreadyLoggedInUser['name'] ?: $alreadyLoggedInUser['username']) ?> 
+                    <span style="text-transform: uppercase; font-size: 11px; background: #3b82f6; color: white; padding: 2px 6px; border-radius: 4px; margin-left: 4px;">
+                        <?= htmlspecialchars($alreadyLoggedInUser['role']) ?>
+                    </span>
+                    <br>
+                    <div style="margin-top: 6px;">
+                        <a href="<?= ($alreadyLoggedInUser['role'] === 'admin') ? 'admin_dashboard.php' : 'dashboard.php' ?>" class="btn" style="padding: 4px 10px; font-size: 12px; margin-right: 6px;">
+                            Open <?= ($alreadyLoggedInUser['role'] === 'admin') ? 'Admin Dashboard' : 'Student Dashboard' ?> &rarr;
+                        </a>
+                        <a href="logout.php" style="font-size: 12px; color: #dc2626; text-decoration: underline;">
+                            Sign Out to Switch Account
+                        </a>
+                    </div>
+                </div>
+            <?php endif; ?>
+
             <?php if (!empty($loginError)): ?>
                 <div class="alert-box alert-error" role="alert">
                     <?= htmlspecialchars($loginError, ENT_QUOTES, "UTF-8") ?>
@@ -225,7 +254,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         type="text" 
                         id="login-identifier" 
                         name="loginIdentifier" 
-                        placeholder="e.g. smit_26 or smit@charusat.edu.in"
+                        placeholder="e.g. smit_test01 or admin email"
                         value="<?= htmlspecialchars($_POST['loginIdentifier'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
                         required
                     >
@@ -250,6 +279,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                 <button type="submit" class="btn" style="width: 100%;">Login</button>
             </form>
+
+            <div class="credentials-hint">
+                <strong>Demo Credentials:</strong><br>
+                &bull; <strong>Admin:</strong> Username: <code>smit_test01</code> | Password: <code>AdminSecret123!</code><br>
+                &bull; <strong>Student:</strong> Username: <code>alex_rivera</code> | Password: <code>mySecurePassword123!</code>
+            </div>
 
             <p style="margin-top: 18px; font-size: 13px;">
                 Don't have an account? <a href="signup.html">Sign Up here</a>

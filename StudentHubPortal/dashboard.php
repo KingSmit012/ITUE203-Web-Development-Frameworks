@@ -4,12 +4,7 @@ require_once __DIR__ . '/auth.php';
 // Restrict access: Only logged-in users can view the dashboard
 require_login();
 
-// If an admin accidentally navigates here, redirect them to admin dashboard
-if (($_SESSION['role'] ?? 'student') === 'admin') {
-    header("Location: admin_dashboard.php");
-    exit;
-}
-
+$isAdminPreview = (($_SESSION['role'] ?? 'student') === 'admin');
 $currentUser = current_user();
 ?>
 <!DOCTYPE html>
@@ -43,60 +38,21 @@ $currentUser = current_user();
 </head>
 <body>
 
-    <aside class="sidebar">
-        <div class="sidebar-header">
-            <h2>Student Portal</h2>
-            <p>Academic Year 2026-27</p>
-        </div>
-        <ul class="sidebar-menu">
-            <li><a href="dashboard.php" class="active">Dashboard</a></li>
-            <li><a href="profile.html">Profile</a></li>
-            <li><a href="attendance.html">Attendance</a></li>
-            <li><a href="courses.html">Courses</a></li>
-            <li><a href="assignments.html">Assignments</a></li>
-            <li><a href="exams.html">Exams</a></li>
-            <li><a href="results.html">Results</a></li>
-            <li><a href="timetable.html">Timetable</a></li>
-            <li><a href="fees.html">Fees</a></li>
-            <li><a href="settings.html">Settings</a></li>
-        </ul>
-    </aside>
+    <!-- Dynamic Sidebar Menu -->
+    <?php render_sidebar('dashboard'); ?>
 
-    <!-- Top Navbar -->
-    <header class="top-navbar">
-        <span class="navbar-title">Dashboard</span>
-        <div class="navbar-right">
-            <button id="theme-toggle" class="theme-toggle-btn" type="button" aria-label="Toggle theme" title="Toggle theme">
-                <span class="theme-toggle-track">
-                    <span class="theme-toggle-thumb">
-                        <svg class="theme-icon sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="5"></circle>
-                            <line x1="12" y1="1" x2="12" y2="3"></line>
-                            <line x1="12" y1="21" x2="12" y2="23"></line>
-                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                            <line x1="1" y1="12" x2="3" y2="12"></line>
-                            <line x1="21" y1="12" x2="23" y2="12"></line>
-                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                        </svg>
-                        <svg class="theme-icon moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                        </svg>
-                    </span>
-                </span>
-                <span class="theme-toggle-text">Theme</span>
-            </button>
-            <span class="navbar-user">
-                Welcome, <?= htmlspecialchars($currentUser['name'] ?: $currentUser['username'], ENT_QUOTES, 'UTF-8') ?>
-                <span class="role-badge"><?= htmlspecialchars($currentUser['role'], ENT_QUOTES, 'UTF-8') ?></span>
-            </span>
-            <a href="logout.php" class="btn btn-outline btn-sm" style="padding: 4px 10px; font-size: 11.5px;" title="Securely Sign Out">Sign Out</a>
-        </div>
-    </header>
+    <!-- Dynamic Top Navbar -->
+    <?php render_top_navbar('Student Dashboard'); ?>
 
     <!-- Main Content -->
     <main class="main-content">
+
+        <?php if ($isAdminPreview): ?>
+            <div style="background: #eff6ff; border: 1px solid #bfdbfe; color: #1e40af; padding: 12px 18px; border-radius: 8px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: gap; gap: 10px;">
+                <span><strong>🛡️ Admin Preview Mode:</strong> You are viewing the Student Portal with Administrator privileges.</span>
+                <a href="admin_dashboard.php" class="btn btn-sm" style="background: #2563eb; color: white; text-decoration: none;">&larr; Back to Admin Dashboard</a>
+            </div>
+        <?php endif; ?>
 
         <!-- Page Header -->
         <div class="page-header">
